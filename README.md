@@ -32,7 +32,7 @@ MovieLens (100k)
 - Most recent 20% → test
 - If a user has <2 ratings,  all goes to train
 
-## Model — Item-Based KNN
+## Model - Item-Based KNN
 
 - Sparse CSR user–item matrix
 - Cosine similarity
@@ -45,3 +45,29 @@ MovieLens (100k)
 - Stable item vectors
 - Easy to scale
 - Good for explainable recommendations
+
+## Evaluation Metrics
+
+All metrics are computed on per-user ranked recommendation lists:
+
+Metric      Description
+Hit@10	    Whether any test movie appears in top-10
+Recall@10	Fraction of user’s test items retrieved
+NDCG@10	    Ranking quality (position-sensitive)
+
+## Model Performance
+
+Hit@10:    0.5311
+Recall@10: 0.0638
+NDCG@10:   0.1219
+
+## How Recommendations Work
+
+- For each user, identify movies they have rated.
+- For each rated movie, find its K nearest neighbors.
+- Compute a weighted score using:
+- Similarity weight
+- User’s rating for the anchor movie
+- Aggregate scores across all rated items.
+- Filter out movies already seen.
+- Return top-K recommendations.
